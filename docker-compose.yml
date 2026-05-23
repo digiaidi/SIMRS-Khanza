@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.5
+    container_name: khanza-db
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: sik
+    ports:
+      - "3306:3306"
+    volumes:
+      - khanza_db_data:/var/lib/mysql
+      - ./sql.sik:/docker-entrypoint-initdb.d/1-sik.sql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: khanza-pma
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ""
+      UPLOAD_LIMIT: 500M
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  webapps:
+    build:
+      context: ./docker/webapps
+    container_name: khanza-webapps
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./webapps:/var/www/html
+    depends_on:
+      - db
+
+volumes:
+  khanza_db_data:

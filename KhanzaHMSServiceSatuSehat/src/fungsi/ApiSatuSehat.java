@@ -88,7 +88,36 @@ public class ApiSatuSehat {
         scheme=new Scheme("https",443,sslFactory);
         factory=new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        return new RestTemplate(factory);
+        
+        RestTemplate restTemplate = new RestTemplate(new org.springframework.http.client.BufferingClientHttpRequestFactory(factory));
+        restTemplate.setInterceptors(java.util.Collections.singletonList(new org.springframework.http.client.ClientHttpRequestInterceptor() {
+            @Override
+            public org.springframework.http.client.ClientHttpResponse intercept(org.springframework.http.HttpRequest request, byte[] body, org.springframework.http.client.ClientHttpRequestExecution execution) throws java.io.IOException {
+                org.springframework.http.client.ClientHttpResponse response = execution.execute(request, body);
+                
+                try {
+                    String reqBody = new String(body, java.nio.charset.StandardCharsets.UTF_8);
+                    String resBody = org.springframework.util.StreamUtils.copyToString(response.getBody(), java.nio.charset.StandardCharsets.UTF_8);
+                    String url = request.getURI().toString();
+                    String method = request.getMethod().name();
+                    
+                    String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new java.util.Date());
+                    String logDir = "/Users/user/OPREK2/simrs-khanza/satusehat_logs";
+                    java.nio.file.Files.createDirectories(java.nio.file.Paths.get(logDir));
+                    
+                    String logData = "=== REQUEST ===\nTIME: " + timeStamp + "\nURL: " + url + "\nMETHOD: " + method + "\nBODY:\n" + reqBody + "\n\n" +
+                                     "=== RESPONSE ===\nSTATUS: " + response.getRawStatusCode() + "\nBODY:\n" + resBody + "\n\n--------------------------------------------------\n";
+                                     
+                    java.nio.file.Files.write(java.nio.file.Paths.get(logDir + "/payload_" + timeStamp + ".log"), logData.getBytes(), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+                } catch (Exception e) {
+                    System.out.println("Gagal menulis log SatuSehat: " + e.getMessage());
+                }
+                
+                return response;
+            }
+        }));
+        
+        return restTemplate;
     }
 
 }

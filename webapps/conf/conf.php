@@ -3,7 +3,7 @@
         exit(header("Location:../index.php"));
     }
     
-    $db_hostname    = "localhost";
+    $db_hostname    = "db";
     $db_username    = "root";
     $db_password    = "";
     $db_name        = "sik";
