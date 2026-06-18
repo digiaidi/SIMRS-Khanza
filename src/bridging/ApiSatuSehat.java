@@ -102,17 +102,50 @@ public class ApiSatuSehat {
                     String resBody = org.springframework.util.StreamUtils.copyToString(response.getBody(), java.nio.charset.StandardCharsets.UTF_8);
                     String url = request.getURI().toString();
                     String method = request.getMethod().name();
+                    int statusCode = response.getRawStatusCode();
+                    String timeStamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date());
                     
-                    String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new java.util.Date());
+                    // Rekam tersentralisasi ke database utama SIMRS (100% global client coverage)
+                    try (java.sql.Connection con = fungsi.koneksiDB.condb()) {
+                        if (con != null) {
+                            // Self-bootstrap tabel log jika belum terbentuk
+                            try (java.sql.Statement stmt = con.createStatement()) {
+                                stmt.execute("CREATE TABLE IF NOT EXISTS satusehat_payload_logs (" +
+                                             "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                                             "timestamp VARCHAR(30), " +
+                                             "url VARCHAR(255), " +
+                                             "method VARCHAR(10), " +
+                                             "status_code INT, " +
+                                             "request_body LONGTEXT, " +
+                                             "response_body LONGTEXT" +
+                                             ")");
+                            }
+                            
+                            // Insert log request & response
+                            String query = "INSERT INTO satusehat_payload_logs (timestamp, url, method, status_code, request_body, response_body) VALUES (?, ?, ?, ?, ?, ?)";
+                            try (java.sql.PreparedStatement ps = con.prepareStatement(query)) {
+                                ps.setString(1, timeStamp);
+                                ps.setString(2, url);
+                                ps.setString(3, method);
+                                ps.setInt(4, statusCode);
+                                ps.setString(5, reqBody);
+                                ps.setString(6, resBody);
+                                ps.executeUpdate();
+                            }
+                        }
+                    } catch (Exception dbEx) {
+                        System.out.println("Gagal mencatat log SatuSehat ke database terpusat: " + dbEx.getMessage());
+                    }
+                    
+                    // Fallback log lokal untuk kemudahan debugging lokal
                     String logDir = "/Users/user/OPREK2/simrs-khanza/satusehat_logs";
                     java.nio.file.Files.createDirectories(java.nio.file.Paths.get(logDir));
-                    
+                    String logFileStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new java.util.Date());
                     String logData = "=== REQUEST ===\nTIME: " + timeStamp + "\nURL: " + url + "\nMETHOD: " + method + "\nBODY:\n" + reqBody + "\n\n" +
-                                     "=== RESPONSE ===\nSTATUS: " + response.getRawStatusCode() + "\nBODY:\n" + resBody + "\n\n--------------------------------------------------\n";
-                                     
-                    java.nio.file.Files.write(java.nio.file.Paths.get(logDir + "/payload_" + timeStamp + ".log"), logData.getBytes(), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+                                     "=== RESPONSE ===\nSTATUS: " + statusCode + "\nBODY:\n" + resBody + "\n\n--------------------------------------------------\n";
+                    java.nio.file.Files.write(java.nio.file.Paths.get(logDir + "/payload_" + logFileStamp + ".log"), logData.getBytes(), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
                 } catch (Exception e) {
-                    System.out.println("Gagal menulis log SatuSehat: " + e.getMessage());
+                    System.out.println("Gagal memproses interseptor log SatuSehat: " + e.getMessage());
                 }
                 
                 return response;

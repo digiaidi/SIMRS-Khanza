@@ -1,0 +1,36 @@
+{
+  "name": "carepay-qris-gateway",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "build": "bun build src/index.ts --target=bun --outfile=dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@effect/experimental": "^0.60.0",
+    "@effect/platform": "^0.96.1",
+    "@effect/platform-bun": "^0.90.0",
+    "@effect/schema": "^0.75.0",
+    "@effect/sql": "^0.24.0",
+    "@effect/sql-mysql2": "^0.18.0",
+    "@effect/workflow": "0.18.2",
+    "@opentui/core": "^0.4.1",
+    "@opentui/react": "^0.4.1",
+    "@types/react": "^19.2.17",
+    "effect": "^3.21.2",
+    "hono": "^4.4.0",
+    "mysql2": "^3.10.0",
+    "nanoid": "^5.0.7",
+    "qrcode": "^1.5.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/bun": "latest",
+    "@types/qrcode": "^1.5.5"
+  }
+}
