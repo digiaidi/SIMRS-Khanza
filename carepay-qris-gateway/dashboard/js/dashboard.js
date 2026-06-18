@@ -268,7 +268,7 @@ async function retryRecon(jobId) {
 // === Health ===
 async function loadHealth() {
   try {
-    const health = await api('/api/health/');
+    const health = await api('/api/health');
     const el = document.getElementById('health-content');
     el.innerHTML = `
       <div class="health-check">
