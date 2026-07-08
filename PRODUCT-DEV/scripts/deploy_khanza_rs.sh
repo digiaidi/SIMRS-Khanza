@@ -62,6 +62,15 @@ for module in pasien_core rawat_jalan farmasi keuangan; do
   echo "  ✓ $module/api.py"
 done
 
+# Copy pasien_core Doctypes if any
+if [ -d "$SCAFFOLD_DIR/$APP_NAME/pasien_core/doctype" ]; then
+  ssh "$REMOTE" "mkdir -p $BENCH_DIR/apps/$APP_NAME/$APP_NAME/pasien_core/doctype"
+  scp -r "$SCAFFOLD_DIR/$APP_NAME/pasien_core/doctype/"* \
+      "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/pasien_core/doctype/"
+  echo "  ✓ pasien_core Doctypes"
+fi
+
+
 # Copy test files
 ssh "$REMOTE" "mkdir -p $BENCH_DIR/apps/$APP_NAME/$APP_NAME/tests"
 scp "$SCAFFOLD_DIR/$APP_NAME/tests/__init__.py" \

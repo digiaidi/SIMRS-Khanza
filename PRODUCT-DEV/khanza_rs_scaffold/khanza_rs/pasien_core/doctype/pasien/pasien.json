@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:no_rkm_medis",
+ "creation": "2026-07-08 12:00:00",
+ "doctype": "DocType",
+ "document_type": "Master",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_rkm_medis",
+  "nm_pasien",
+  "no_ktp",
+  "jk",
+  "tgl_lahir",
+  "alamat",
+  "no_peserta",
+  "gol_darah",
+  "no_tlp"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_rkm_medis",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. Rekam Medis",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "nm_pasien",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Pasien",
+   "reqd": 1
+  },
+  {
+   "fieldname": "no_ktp",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. KTP / NIK",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "jk",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Jenis Kelamin",
+   "options": "L\nP",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tgl_lahir",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Lahir",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alamat",
+   "fieldtype": "Small Text",
+   "label": "Alamat Tinggal"
+  },
+  {
+   "fieldname": "no_peserta",
+   "fieldtype": "Data",
+   "label": "No. Peserta BPJS"
+  },
+  {
+   "fieldname": "gol_darah",
+   "fieldtype": "Select",
+   "label": "Golongan Darah",
+   "options": "-\nA\nB\nAB\nO"
+  },
+  {
+   "fieldname": "no_tlp",
+   "fieldtype": "Data",
+   "label": "No. Telepon"
+  }
+ ],
+ "icon": "fa fa-user",
+ "idx": 1,
+ "links": [],
+ "modified": "2026-07-08 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Pasien Core",
+ "name": "Pasien",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

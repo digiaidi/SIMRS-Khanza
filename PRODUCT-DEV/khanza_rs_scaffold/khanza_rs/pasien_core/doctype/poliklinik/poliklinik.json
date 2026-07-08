@@ -1,0 +1,76 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:kd_poli",
+ "creation": "2026-07-08 12:00:00",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "engine": "InnoDB",
+ "field_order": [
+  "kd_poli",
+  "nm_poli",
+  "registrasi",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "kd_poli",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Kode Poliklinik",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "nm_poli",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Poliklinik",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registrasi",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Biaya Registrasi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status Aktif",
+   "options": "Aktif\nNon-Aktif",
+   "reqd": 1
+  }
+ ],
+ "icon": "fa fa-hospital-o",
+ "idx": 1,
+ "links": [],
+ "modified": "2026-07-08 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Pasien Core",
+ "name": "Poliklinik",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

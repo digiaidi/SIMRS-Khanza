@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:no_rawat",
+ "creation": "2026-07-08 12:00:00",
+ "doctype": "DocType",
+ "document_type": "Transaction",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_rawat",
+  "no_rkm_medis",
+  "nm_pasien",
+  "tgl_registrasi",
+  "jam_reg",
+  "kd_poli",
+  "nm_poli",
+  "kd_dokter",
+  "nm_dokter",
+  "p_jawab",
+  "biaya_reg",
+  "stts",
+  "status_lanjut"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_rawat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. Rawat",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "no_rkm_medis",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "No. Rekam Medis",
+   "options": "Pasien",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "no_rkm_medis.nm_pasien",
+   "fieldname": "nm_pasien",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Pasien",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tgl_registrasi",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Registrasi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "jam_reg",
+   "fieldtype": "Time",
+   "label": "Jam Registrasi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "kd_poli",
+   "fieldtype": "Link",
+   "label": "Poliklinik",
+   "options": "Poliklinik",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "kd_poli.nm_poli",
+   "fieldname": "nm_poli",
+   "fieldtype": "Data",
+   "label": "Nama Poliklinik",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kd_dokter",
+   "fieldtype": "Data",
+   "label": "Kode Dokter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nm_dokter",
+   "fieldtype": "Data",
+   "label": "Nama Dokter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "p_jawab",
+   "fieldtype": "Select",
+   "label": "Cara Bayar / P.J.",
+   "options": "Umum\nBPJS\nAsuransi",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "kd_poli.registrasi",
+   "fieldname": "biaya_reg",
+   "fieldtype": "Currency",
+   "label": "Biaya Registrasi",
+   "read_only": 1
+  },
+  {
+   "default": "Belum",
+   "fieldname": "stts",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status Layanan",
+   "options": "Belum\nSudah\nBatal\nDirujuk",
+   "reqd": 1
+  },
+  {
+   "default": "Ralan",
+   "fieldname": "status_lanjut",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status Rawat",
+   "options": "Ralan\nRanap",
+   "reqd": 1
+  }
+ ],
+ "icon": "fa fa-file-text-o",
+ "idx": 1,
+ "links": [],
+ "modified": "2026-07-08 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Pasien Core",
+ "name": "Registrasi Pasien",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
