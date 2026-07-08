@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "creation": "2026-07-08 13:00:00",
+ "doctype": "DocType",
+ "document_type": "Child Leaf",
+ "engine": "InnoDB",
+ "field_order": [
+  "nama_pemeriksaan",
+  "nilai_hasil",
+  "satuan",
+  "nilai_rujukan",
+  "keterangan"
+ ],
+ "fields": [
+  {
+   "fieldname": "nama_pemeriksaan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Parameter Uji Lab",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nilai_hasil",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nilai Hasil",
+   "reqd": 1
+  },
+  {
+   "fieldname": "satuan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Satuan"
+  },
+  {
+   "fieldname": "nilai_rujukan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nilai Rujukan"
+  },
+  {
+   "fieldname": "keterangan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Keterangan"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-07-08 13:00:00",
+ "modified_by": "Administrator",
+ "module": "Penunjang Medis",
+ "name": "Hasil Lab Detail",
+ "owner": "Administrator"
+}

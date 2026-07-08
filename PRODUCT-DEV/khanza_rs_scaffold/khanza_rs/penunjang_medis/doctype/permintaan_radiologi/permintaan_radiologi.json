@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "Format: RAD-REQ-.#####",
+ "creation": "2026-07-08 13:00:00",
+ "doctype": "DocType",
+ "document_type": "Transaction",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_permintaan",
+  "no_rawat",
+  "tgl_permintaan",
+  "jam_permintaan",
+  "dokter_pengirim",
+  "klinis_informasi",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_permintaan",
+   "fieldtype": "Data",
+   "label": "No. Permintaan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "no_rawat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. Rawat",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tgl_permintaan",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Permintaan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "jam_permintaan",
+   "fieldtype": "Time",
+   "label": "Jam Permintaan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dokter_pengirim",
+   "fieldtype": "Data",
+   "label": "Dokter Pengirim",
+   "reqd": 1
+  },
+  {
+   "fieldname": "klinis_informasi",
+   "fieldtype": "Small Text",
+   "label": "Informasi Klinis / Diagnosa Awal"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nDiproses\nSelesai",
+   "default": "Pending"
+  }
+ ],
+ "icon": "fa fa-eye",
+ "idx": 1,
+ "modified": "2026-07-08 13:00:00",
+ "modified_by": "Administrator",
+ "module": "Penunjang Medis",
+ "name": "Permintaan Radiologi",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ]
+}

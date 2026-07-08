@@ -14,6 +14,8 @@ import sys
 mock_frappe = MagicMock()
 sys.modules['frappe'] = mock_frappe
 mock_frappe._ = lambda x: x
+mock_frappe.whitelist = lambda *args, **kwargs: lambda fn: fn
+
 
 # Now import the APIs
 from khanza_rs.pasien_core.api import get_pasien_info, get_registrasi_aktif
@@ -106,5 +108,46 @@ class TestKeuanganAPI(unittest.TestCase):
         self.assertEqual(mock_billing.grand_total, 270000)
 
 
+        self.assertEqual(mock_billing.grand_total, 270000)
+
+
+class TestRawatInapAPI(unittest.TestCase):
+    @patch('khanza_rs.rawat_inap.api.frappe')
+    def test_checkin_pasien_ranap(self, mock_f):
+        # Mock DB checks
+        mock_f.db.exists.return_value = False
+        mock_f.utils.today.return_value = "2026-07-08"
+        mock_f.utils.nowtime.return_value = "15:00:00"
+        
+        mock_doc = MagicMock()
+        mock_doc.name = "RI-00001"
+        mock_f.get_doc.return_value = mock_doc
+        
+        # Import dynamically to ensure mocked frappe is used
+        from khanza_rs.rawat_inap.api import checkin_pasien_ranap
+        
+        res = checkin_pasien_ranap("2026/07/08/000001", "KMR-01", "Diagnosa Awal")
+        self.assertEqual(res, "RI-00001")
+        mock_f.get_doc.assert_called_once()
+
+
+class TestPenunjangMedisAPI(unittest.TestCase):
+    @patch('khanza_rs.penunjang_medis.api.frappe')
+    def test_create_permintaan_lab(self, mock_f):
+        mock_f.utils.today.return_value = "2026-07-08"
+        mock_f.utils.nowtime.return_value = "15:00:00"
+        
+        mock_doc = MagicMock()
+        mock_doc.name = "REQ-LAB-01"
+        mock_f.get_doc.return_value = mock_doc
+        
+        from khanza_rs.penunjang_medis.api import create_permintaan_lab
+        
+        res = create_permintaan_lab("2026/07/08/000001", "Dr. Budi", "Check DB")
+        self.assertEqual(res, "REQ-LAB-01")
+        mock_f.get_doc.assert_called_once()
+
+
 if __name__ == '__main__':
     unittest.main()
+

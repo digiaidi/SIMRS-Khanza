@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2026-07-08 13:00:00",
+ "doctype": "DocType",
+ "document_type": "Transaction",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_rawat",
+  "tanggal",
+  "waktu_makan",
+  "jenis_diet",
+  "keterangan"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_rawat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. Rawat",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanggal",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waktu_makan",
+   "fieldtype": "Select",
+   "label": "Waktu Makan",
+   "options": "Pagi\nSiang\nSore\nMalam",
+   "reqd": 1
+  },
+  {
+   "fieldname": "jenis_diet",
+   "fieldtype": "Data",
+   "label": "Jenis Diet (Biasa/Bubur/Diet Rendah Garam)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "keterangan",
+   "fieldtype": "Small Text",
+   "label": "Keterangan / Alergi"
+  }
+ ],
+ "icon": "fa fa-cutlery",
+ "idx": 1,
+ "modified": "2026-07-08 13:00:00",
+ "modified_by": "Administrator",
+ "module": "Rawat Inap",
+ "name": "Diet Gizi Pasien",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ]
+}

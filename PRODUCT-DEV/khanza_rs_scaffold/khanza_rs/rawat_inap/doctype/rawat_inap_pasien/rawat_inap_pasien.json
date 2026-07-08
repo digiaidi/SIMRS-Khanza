@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2026-07-08 13:00:00",
+ "doctype": "DocType",
+ "document_type": "Transaction",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_rawat",
+  "tgl_masuk",
+  "jam_masuk",
+  "kd_kamar",
+  "tarif_kamar",
+  "diagnosa_awal",
+  "tgl_keluar",
+  "jam_keluar",
+  "stts_pulang",
+  "total_hari"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_rawat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. Rawat",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tgl_masuk",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Masuk",
+   "reqd": 1
+  },
+  {
+   "fieldname": "jam_masuk",
+   "fieldtype": "Time",
+   "label": "Jam Masuk",
+   "reqd": 1
+  },
+  {
+   "fieldname": "kd_kamar",
+   "fieldtype": "Data",
+   "label": "Kode Kamar / Bed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tarif_kamar",
+   "fieldtype": "Currency",
+   "label": "Tarif Kamar"
+  },
+  {
+   "fieldname": "diagnosa_awal",
+   "fieldtype": "Data",
+   "label": "Diagnosa Awal (ICD-10)"
+  },
+  {
+   "fieldname": "tgl_keluar",
+   "fieldtype": "Date",
+   "label": "Tanggal Keluar"
+  },
+  {
+   "fieldname": "jam_keluar",
+   "fieldtype": "Time",
+   "label": "Jam Keluar"
+  },
+  {
+   "fieldname": "stts_pulang",
+   "fieldtype": "Select",
+   "label": "Status Pulang",
+   "options": "\nSembuh\nMembaik\nRujuk\nMeninggal\nAPS"
+  },
+  {
+   "fieldname": "total_hari",
+   "fieldtype": "Int",
+   "label": "Total Hari Rawat",
+   "read_only": 1
+  }
+ ],
+ "icon": "fa fa-bed",
+ "idx": 1,
+ "modified": "2026-07-08 13:00:00",
+ "modified_by": "Administrator",
+ "module": "Rawat Inap",
+ "name": "Rawat Inap Pasien",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ]
+}

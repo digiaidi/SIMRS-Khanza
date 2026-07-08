@@ -68,7 +68,7 @@ for module in pasien_core rawat_jalan farmasi keuangan rawat_inap penunjang_medi
 done
 
 # Copy module Doctypes if they exist
-for module in pasien_core rawat_jalan farmasi keuangan; do
+for module in pasien_core rawat_jalan farmasi keuangan rawat_inap penunjang_medis kepegawaian bridging; do
   if [ -d "$SCAFFOLD_DIR/$APP_NAME/$module/doctype" ]; then
     ssh "$REMOTE" "mkdir -p $BENCH_DIR/apps/$APP_NAME/$APP_NAME/$module/doctype"
     scp -r "$SCAFFOLD_DIR/$APP_NAME/$module/doctype/"* \
@@ -76,6 +76,7 @@ for module in pasien_core rawat_jalan farmasi keuangan; do
     echo "  ✓ $module Doctypes"
   fi
 done
+
 
 
 # Copy test files

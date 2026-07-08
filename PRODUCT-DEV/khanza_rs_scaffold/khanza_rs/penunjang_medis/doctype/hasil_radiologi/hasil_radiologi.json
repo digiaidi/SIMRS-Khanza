@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "Format: RAD-RES-.#####",
+ "creation": "2026-07-08 13:00:00",
+ "doctype": "DocType",
+ "document_type": "Transaction",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_hasil",
+  "no_permintaan",
+  "tgl_periksa",
+  "jam_periksa",
+  "dokter_radiolog",
+  "hasil"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_hasil",
+   "fieldtype": "Data",
+   "label": "No. Hasil Radiologi",
+   "read_only": 1
+  },
+  {
+   "fieldname": "no_permintaan",
+   "fieldtype": "Link",
+   "options": "Permintaan Radiologi",
+   "in_list_view": 1,
+   "label": "No. Permintaan Radiologi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tgl_periksa",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Periksa",
+   "reqd": 1
+  },
+  {
+   "fieldname": "jam_periksa",
+   "fieldtype": "Time",
+   "label": "Jam Periksa",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dokter_radiolog",
+   "fieldtype": "Data",
+   "label": "Dokter Sp.Rad Pemeriksa",
+   "reqd": 1
+  },
+  {
+   "fieldname": "hasil",
+   "fieldtype": "Text",
+   "label": "Hasil Expertise/Bacaan Radiologi",
+   "reqd": 1
+  }
+ ],
+ "icon": "fa fa-eye",
+ "idx": 1,
+ "modified": "2026-07-08 13:00:00",
+ "modified_by": "Administrator",
+ "module": "Penunjang Medis",
+ "name": "Hasil Radiologi",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ]
+}
