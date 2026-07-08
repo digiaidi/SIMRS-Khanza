@@ -1,0 +1,97 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:queue_id",
+ "creation": "2026-04-13 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "queue_id",
+  "patient",
+  "ihs_number",
+  "endpoint",
+  "status",
+  "retry_count",
+  "payload_json",
+  "result_json"
+ ],
+ "fields": [
+  {
+   "fieldname": "queue_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Queue ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Pasien",
+   "options": "Rawatin Patient"
+  },
+  {
+   "fieldname": "ihs_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "IHS Number"
+  },
+  {
+   "fieldname": "endpoint",
+   "fieldtype": "Data",
+   "label": "Endpoint"
+  },
+  {
+   "default": "pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "pending\nsuccess\nfailed\ndead"
+  },
+  {
+   "default": "0",
+   "fieldname": "retry_count",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Retry Count"
+  },
+  {
+   "fieldname": "payload_json",
+   "fieldtype": "Long Text",
+   "label": "Payload JSON"
+  },
+  {
+   "fieldname": "result_json",
+   "fieldtype": "Long Text",
+   "label": "Result JSON"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bridging",
+ "name": "Rawatin Queue Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -148,6 +148,15 @@ class TestPenunjangMedisAPI(unittest.TestCase):
         mock_f.get_doc.assert_called_once()
 
 
+class TestBridgingAPI(unittest.TestCase):
+    @patch('khanza_rs.bridging.api.frappe')
+    def test_create_satusehat_views(self, mock_f):
+        from khanza_rs.bridging.api import create_satusehat_views
+        create_satusehat_views()
+        self.assertEqual(mock_f.db.sql.call_count, 5)
+
+
 if __name__ == '__main__':
     unittest.main()
+
 

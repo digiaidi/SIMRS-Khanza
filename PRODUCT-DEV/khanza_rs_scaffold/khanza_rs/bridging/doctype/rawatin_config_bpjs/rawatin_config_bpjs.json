@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:kode_faskes",
+ "creation": "2026-04-13 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "engine": "InnoDB",
+ "field_order": [
+  "kode_faskes",
+  "cons_id",
+  "secret_key",
+  "user_key_vclaim",
+  "user_key_antrean",
+  "is_operasional",
+  "url_vclaim",
+  "url_antrean",
+  "url_aplicares",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "kode_faskes",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Kode Faskes",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "cons_id",
+   "fieldtype": "Data",
+   "label": "Cons ID"
+  },
+  {
+   "fieldname": "secret_key",
+   "fieldtype": "Password",
+   "label": "Secret Key"
+  },
+  {
+   "fieldname": "user_key_vclaim",
+   "fieldtype": "Data",
+   "label": "User Key VClaim"
+  },
+  {
+   "fieldname": "user_key_antrean",
+   "fieldtype": "Data",
+   "label": "User Key Antrean"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_operasional",
+   "fieldtype": "Check",
+   "label": "Mode Operasional"
+  },
+  {
+   "fieldname": "url_vclaim",
+   "fieldtype": "Data",
+   "label": "URL VClaim"
+  },
+  {
+   "fieldname": "url_antrean",
+   "fieldtype": "Data",
+   "label": "URL Antrean"
+  },
+  {
+   "fieldname": "url_aplicares",
+   "fieldtype": "Data",
+   "label": "URL Aplicares"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Active"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bridging",
+ "name": "Rawatin Config BPJS",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:no_rm",
+ "creation": "2026-04-13 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Master",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_rm",
+  "nik",
+  "ihs_number",
+  "full_name",
+  "birth_date",
+  "gender",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_rm",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No RM",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "nik",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "NIK",
+   "length": 16
+  },
+  {
+   "fieldname": "ihs_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "IHS Number"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Lengkap",
+   "reqd": 1
+  },
+  {
+   "fieldname": "birth_date",
+   "fieldtype": "Date",
+   "label": "Tanggal Lahir"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Jenis Kelamin",
+   "options": "\nLAKI-LAKI\nPEREMPUAN"
+  },
+  {
+   "default": "Aktif",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Aktif\nBatal - PAPS / Piutang Tak Tertagih"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bridging",
+ "name": "Rawatin Patient",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

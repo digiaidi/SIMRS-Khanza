@@ -1,0 +1,180 @@
+{
+ "actions": [],
+ "allow_import": 0,
+ "autoname": "field:event_id",
+ "creation": "2026-06-21 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Other",
+ "engine": "InnoDB",
+ "field_order": [
+  "event_id",
+  "event_type",
+  "source",
+  "source_site",
+  "schema_version",
+  "doctype_ref",
+  "docname",
+  "method",
+  "occurred_at",
+  "idempotency_key",
+  "tenant",
+  "data",
+  "status",
+  "error_message",
+  "retry_count",
+  "next_retry_at",
+  "claimed_at",
+  "locked_by",
+  "sent_at",
+  "last_attempt_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Data",
+   "default": "rawatin_bridge",
+   "label": "Source"
+  },
+  {
+   "fieldname": "source_site",
+   "fieldtype": "Data",
+   "default": "erpnext.localhost",
+   "label": "Source Site"
+  },
+  {
+   "fieldname": "schema_version",
+   "fieldtype": "Int",
+   "default": 1,
+   "label": "Schema Version"
+  },
+  {
+   "fieldname": "doctype_ref",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "DocType Ref",
+   "reqd": 1
+  },
+  {
+   "fieldname": "docname",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Docname",
+   "reqd": 1
+  },
+  {
+   "fieldname": "method",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Method",
+   "reqd": 1
+  },
+  {
+   "fieldname": "occurred_at",
+   "fieldtype": "Datetime",
+   "label": "Occurred At"
+  },
+  {
+   "fieldname": "idempotency_key",
+   "fieldtype": "Data",
+   "label": "Idempotency Key",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "tenant",
+   "fieldtype": "Data",
+   "default": "default",
+   "label": "Tenant"
+  },
+  {
+   "fieldname": "data",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "label": "Payload Data"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nSent\nFailed\nDead"
+  },
+  {
+   "fieldname": "error_message",
+   "fieldtype": "Text",
+   "label": "Error Message"
+  },
+  {
+   "default": 0,
+   "fieldname": "retry_count",
+   "fieldtype": "Int",
+   "label": "Retry Count"
+  },
+  {
+   "fieldname": "next_retry_at",
+   "fieldtype": "Datetime",
+   "label": "Next Retry At"
+  },
+  {
+   "fieldname": "claimed_at",
+   "fieldtype": "Datetime",
+   "label": "Claimed At"
+  },
+  {
+   "fieldname": "locked_by",
+   "fieldtype": "Data",
+   "label": "Locked By"
+  },
+  {
+   "fieldname": "sent_at",
+   "fieldtype": "Datetime",
+   "label": "Sent At"
+  },
+  {
+   "fieldname": "last_attempt_at",
+   "fieldtype": "Datetime",
+   "label": "Last Attempt At"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-06-21 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bridging",
+ "name": "Rawatin Event Outbox",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

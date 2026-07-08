@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:service_type",
+ "creation": "2026-04-13 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "engine": "InnoDB",
+ "field_order": [
+  "service_type",
+  "auth_url",
+  "fhir_url",
+  "organization_id",
+  "client_id",
+  "client_secret",
+  "user_key",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "default": "SatuSehat",
+   "fieldname": "service_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Jenis Layanan",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "auth_url",
+   "fieldtype": "Data",
+   "label": "Auth URL",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fhir_url",
+   "fieldtype": "Data",
+   "label": "FHIR URL",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organization_id",
+   "fieldtype": "Data",
+   "label": "Organization ID"
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "label": "Client ID"
+  },
+  {
+   "fieldname": "client_secret",
+   "fieldtype": "Password",
+   "label": "Client Secret"
+  },
+  {
+   "fieldname": "user_key",
+   "fieldtype": "Data",
+   "label": "User Key"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Active"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Bridging",
+ "name": "Rawatin Config SATUSEHAT",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
