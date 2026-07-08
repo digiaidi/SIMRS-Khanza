@@ -153,10 +153,11 @@ class TestBridgingAPI(unittest.TestCase):
     def test_create_satusehat_views(self, mock_f):
         from khanza_rs.bridging.api import create_satusehat_views
         create_satusehat_views()
-        self.assertEqual(mock_f.db.sql.call_count, 5)
+        self.assertEqual(mock_f.db.sql.call_count, 13)
 
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
