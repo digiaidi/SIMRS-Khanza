@@ -26,11 +26,11 @@ Berdasarkan audit skala basis data `sik.sql` (1.161 tabel) dan kode Java (2.100 
 
 ### Ringkasan Distribusi Beban Porting
 
-| Status Porting | Jumlah Tabel | Persentase Tabel | Cakupan Logika Transaksional | Estimasi Sisa Waktu (Sprint) |
-|---|---|---|---|---|
-| **Fase 1 (Selesai)** | ~18 Tabel | ~1.5% | **85% Transaksi Klinis Utama** | Selesai |
-| **Fase 2 (Klinis Penunjang & RME)** | ~750 Tabel | ~64.5% | **15% Logika Kustom & Asesmen** | 2 Sprint (4 Minggu) |
-| **Fase 3 (ERPNext Integration)** | ~393 Tabel | ~34.0% | **Substitusi Operasional Non-Klinis** | 1 Sprint (2 Minggu) |
+| Status Porting                      | Jumlah Tabel | Persentase Tabel | Cakupan Logika Transaksional          | Estimasi Sisa Waktu (Sprint) |
+| ----------------------------------- | ------------ | ---------------- | ------------------------------------- | ---------------------------- |
+| **Fase 1 (Selesai)**                | ~18 Tabel    | ~1.5%            | **85% Transaksi Klinis Utama**        | Selesai                      |
+| **Fase 2 (Klinis Penunjang & RME)** | ~750 Tabel   | ~64.5%           | **15% Logika Kustom & Asesmen**       | 2 Sprint (4 Minggu)          |
+| **Fase 3 (ERPNext Integration)**    | ~393 Tabel   | ~34.0%           | **Substitusi Operasional Non-Klinis** | 1 Sprint (2 Minggu)          |
 
 > [!IMPORTANT]
 > Walaupun Fase 1 hanya memindahkan ~1.5% total tabel dari `sik.sql`, fase ini telah meng-cover **85% nilai transaksional operasional rumah sakit** (Pendaftaran, SOAP, Resep Obat, dan Billing Kasir) serta kepatuhan SatuSehat Kemenkes.

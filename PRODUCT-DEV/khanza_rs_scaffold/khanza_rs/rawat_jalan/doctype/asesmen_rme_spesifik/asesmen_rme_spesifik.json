@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "Format: RME-.#####",
+ "creation": "2026-07-08 12:00:00",
+ "doctype": "DocType",
+ "document_type": "Transaction",
+ "engine": "InnoDB",
+ "field_order": [
+  "no_rawat",
+  "tipe_asesmen",
+  "tgl_asesmen",
+  "pemeriksa",
+  "sb_dinamis",
+  "form_dinamis_html",
+  "data_dinamis"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_rawat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. Rawat",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tipe_asesmen",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tipe Asesmen",
+   "options": "Anak\nKandungan\nMata\nTHT\nJiwa\nGigi\nFisioterapi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tgl_asesmen",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Asesmen",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pemeriksa",
+   "fieldtype": "Data",
+   "label": "Pemeriksa (Dokter/Perawat)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sb_dinamis",
+   "fieldtype": "Section Break",
+   "label": "Formulir Dinamis Spesialis"
+  },
+  {
+   "fieldname": "form_dinamis_html",
+   "fieldtype": "HTML",
+   "label": "Form Dinamis Render"
+  },
+  {
+   "fieldname": "data_dinamis",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "label": "JSON Data Mentah"
+  }
+ ],
+ "icon": "fa fa-wpforms",
+ "idx": 1,
+ "links": [],
+ "modified": "2026-07-08 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Rawat Jalan",
+ "name": "Asesmen RME Spesifik",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
