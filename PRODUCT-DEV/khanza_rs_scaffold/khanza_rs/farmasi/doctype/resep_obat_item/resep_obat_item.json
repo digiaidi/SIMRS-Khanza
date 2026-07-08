@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2026-07-08 12:00:00",
+ "doctype": "DocType",
+ "document_type": "Data",
+ "engine": "InnoDB",
+ "field_order": [
+  "kode_brng",
+  "nama_brng",
+  "jml",
+  "aturan_pakai",
+  "harga",
+  "subtotal"
+ ],
+ "fields": [
+  {
+   "fieldname": "kode_brng",
+   "fieldtype": "Link",
+   "label": "Obat",
+   "options": "Obat",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fetch_from": "kode_brng.nama_brng",
+   "fieldname": "nama_brng",
+   "fieldtype": "Data",
+   "label": "Nama Obat",
+   "read_only": 1
+  },
+  {
+   "fieldname": "jml",
+   "fieldtype": "Float",
+   "label": "Jumlah",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "aturan_pakai",
+   "fieldtype": "Data",
+   "label": "Aturan Pakai",
+   "in_list_view": 1
+  },
+  {
+   "fetch_from": "kode_brng.ralan",
+   "fieldname": "harga",
+   "fieldtype": "Currency",
+   "label": "Harga Satuan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "subtotal",
+   "fieldtype": "Currency",
+   "label": "Subtotal"
+  }
+ ],
+ "icon": "fa fa-list",
+ "idx": 1,
+ "links": [],
+ "modified": "2026-07-08 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Farmasi",
+ "name": "Resep Obat Item",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "istable": 1,
+ "autoname": "Format: Resep Obat Item-.#####"
+}

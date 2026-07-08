@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2026-07-08 12:00:00",
+ "doctype": "DocType",
+ "document_type": "Data",
+ "engine": "InnoDB",
+ "field_order": [
+  "nama",
+  "jenis",
+  "biaya",
+  "jumlah",
+  "subtotal"
+ ],
+ "fields": [
+  {
+   "fieldname": "nama",
+   "fieldtype": "Data",
+   "label": "Nama Item",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "jenis",
+   "fieldtype": "Select",
+   "label": "Jenis",
+   "options": "Registrasi\nTindakan\nObat\nLab\nRadiologi",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "biaya",
+   "fieldtype": "Currency",
+   "label": "Biaya Satuan",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "jumlah",
+   "fieldtype": "Float",
+   "label": "Jumlah",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "subtotal",
+   "fieldtype": "Currency",
+   "label": "Subtotal"
+  }
+ ],
+ "icon": "fa fa-list",
+ "idx": 1,
+ "links": [],
+ "modified": "2026-07-08 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Keuangan",
+ "name": "Billing Item",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "istable": 1,
+ "autoname": "Format: Billing Item-.#####"
+}
