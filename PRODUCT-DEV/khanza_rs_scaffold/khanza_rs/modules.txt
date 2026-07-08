@@ -1,0 +1,9 @@
+SIMRS Khanza
+Pasien Core
+Rawat Jalan
+Rawat Inap
+Farmasi
+Penunjang Medis
+Keuangan
+Kepegawaian
+Bridging

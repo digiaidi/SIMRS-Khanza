@@ -47,10 +47,13 @@ EOF
 echo ""
 echo "[2/5] Copying scaffold files to $REMOTE ..."
 
-# Copy hooks.py
+# Copy hooks.py and modules.txt
 scp "$SCAFFOLD_DIR/$APP_NAME/hooks.py" \
     "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/hooks.py"
-echo "  ✓ hooks.py"
+scp "$SCAFFOLD_DIR/$APP_NAME/modules.txt" \
+    "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/modules.txt"
+echo "  ✓ hooks.py & modules.txt"
+
 
 # Copy module api.py and __init__.py files
 for module in pasien_core rawat_jalan farmasi keuangan; do
