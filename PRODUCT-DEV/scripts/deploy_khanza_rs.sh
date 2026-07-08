@@ -62,6 +62,15 @@ for module in pasien_core rawat_jalan farmasi keuangan; do
   echo "  ✓ $module/api.py"
 done
 
+# Copy test files
+ssh "$REMOTE" "mkdir -p $BENCH_DIR/apps/$APP_NAME/$APP_NAME/tests"
+scp "$SCAFFOLD_DIR/$APP_NAME/tests/__init__.py" \
+    "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/tests/__init__.py"
+scp "$SCAFFOLD_DIR/$APP_NAME/tests/test_e2e_api.py" \
+    "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/tests/test_e2e_api.py"
+echo "  ✓ tests/test_e2e_api.py"
+
+
 # --- Step 3: Install app to site ---
 echo ""
 echo "[3/5] Installing app to site $SITE ..."
