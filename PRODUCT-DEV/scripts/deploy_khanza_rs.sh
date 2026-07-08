@@ -56,13 +56,15 @@ echo "  ✓ hooks.py & modules.txt"
 
 
 # Copy module api.py and __init__.py files
-for module in pasien_core rawat_jalan farmasi keuangan; do
+for module in pasien_core rawat_jalan farmasi keuangan rawat_inap penunjang_medis kepegawaian bridging; do
   ssh "$REMOTE" "mkdir -p $BENCH_DIR/apps/$APP_NAME/$APP_NAME/$module"
   scp "$SCAFFOLD_DIR/$APP_NAME/$module/__init__.py" \
       "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/$module/__init__.py"
-  scp "$SCAFFOLD_DIR/$APP_NAME/$module/api.py" \
-      "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/$module/api.py"
-  echo "  ✓ $module/api.py"
+  if [ -f "$SCAFFOLD_DIR/$APP_NAME/$module/api.py" ]; then
+    scp "$SCAFFOLD_DIR/$APP_NAME/$module/api.py" \
+        "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/$module/api.py"
+  fi
+  echo "  ✓ $module setup"
 done
 
 # Copy pasien_core Doctypes if any
