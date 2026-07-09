@@ -15,6 +15,14 @@ mock_frappe = MagicMock()
 sys.modules['frappe'] = mock_frappe
 mock_frappe._ = lambda x: x
 mock_frappe.whitelist = lambda *args, **kwargs: lambda fn: fn
+def mock_throw(msg, *args, **kwargs):
+    raise Exception(msg)
+mock_frappe.throw = mock_throw
+
+mock_model = MagicMock()
+sys.modules['frappe.model'] = mock_model
+sys.modules['frappe.model.document'] = mock_model
+mock_model.Document = MagicMock
 
 mock_redis = MagicMock()
 sys.modules['redis'] = mock_redis
@@ -52,6 +60,19 @@ class TestPasienCoreAPI(unittest.TestCase):
         self.assertEqual(result["nm_pasien"], "Budi Wiyono")
         self.assertEqual(result["no_ktp"], "3172000000000001")
         self.assertEqual(result["no_peserta"], "0001234567890")
+
+    def test_pasien_validation_valid_nik(self):
+        from khanza_rs.pasien_core.doctype.pasien.pasien import Pasien
+        p = Pasien()
+        p.no_ktp = "1234567890123456"
+        p.validate()
+
+    def test_pasien_validation_invalid_nik(self):
+        from khanza_rs.pasien_core.doctype.pasien.pasien import Pasien
+        p = Pasien()
+        p.no_ktp = "12345678"
+        with self.assertRaises(Exception):
+            p.validate()
 
 
 class TestFarmasiAPI(unittest.TestCase):
@@ -175,6 +196,13 @@ class TestBridgingAPI(unittest.TestCase):
         res = publish_satusehat_event("2026/07/08/000001", "Encounter")
         self.assertTrue(res["success"])
         mock_r.publish.assert_called_once()
+
+    @patch('khanza_rs.bridging.api.frappe')
+    def test_map_drug_to_kfa(self, mock_f):
+        from khanza_rs.bridging.api import map_drug_to_kfa
+        res = map_drug_to_kfa("B001", "930001", "Paracetamol 500mg")
+        self.assertTrue(res["success"])
+        self.assertEqual(mock_f.db.sql.call_count, 2)
 
 
 if __name__ == '__main__':

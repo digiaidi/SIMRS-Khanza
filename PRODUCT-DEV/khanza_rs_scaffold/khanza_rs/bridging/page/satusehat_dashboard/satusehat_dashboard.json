@@ -1,0 +1,16 @@
+{
+ "creation": "2026-07-09 11:51:00",
+ "doctype": "Page",
+ "modified": "2026-07-09 11:51:00",
+ "modified_by": "Administrator",
+ "module": "Bridging",
+ "name": "satusehat_dashboard",
+ "owner": "Administrator",
+ "page_name": "satusehat_dashboard",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "title": "SatuSehat Dashboard"
+}

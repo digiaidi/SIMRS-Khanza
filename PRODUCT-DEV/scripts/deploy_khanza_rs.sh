@@ -77,6 +77,16 @@ for module in pasien_core rawat_jalan farmasi keuangan rawat_inap penunjang_medi
   fi
 done
 
+# Copy module Pages if they exist
+for module in pasien_core rawat_jalan farmasi keuangan rawat_inap penunjang_medis kepegawaian bridging; do
+  if [ -d "$SCAFFOLD_DIR/$APP_NAME/$module/page" ]; then
+    ssh "$REMOTE" "mkdir -p $BENCH_DIR/apps/$APP_NAME/$APP_NAME/$module/page"
+    scp -r "$SCAFFOLD_DIR/$APP_NAME/$module/page/"* \
+        "$REMOTE:$BENCH_DIR/apps/$APP_NAME/$APP_NAME/$module/page/"
+    echo "  ✓ $module Pages"
+  fi
+done
+
 
 
 # Copy test files

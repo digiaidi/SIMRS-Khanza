@@ -336,3 +336,32 @@ def publish_satusehat_event_medication(doc, method=None):
         publish_satusehat_event(doc.no_rawat, "MedicationRequest")
 
 
+@frappe.whitelist(allow_guest=True)
+def map_drug_to_kfa(kode_brng, kfa_code, kfa_display):
+    """
+    Exposes an API endpoint to map local drug catalogue entries to standard KFA codes
+    and automatically registers both mapping and mock medication resources.
+    """
+    if not (kode_brng and kfa_code and kfa_display):
+        frappe.throw("Parameter kode_brng, kfa_code, dan kfa_display harus lengkap!")
+
+    # Insert/Update into satu_sehat_mapping_obat
+    frappe.db.sql("""
+        INSERT INTO satu_sehat_mapping_obat (kode_brng, obat_code, obat_display)
+        VALUES (%s, %s, %s)
+        ON DUPLICATE KEY UPDATE obat_code = %s, obat_display = %s
+    """, (kode_brng, kfa_code, kfa_display, kfa_code, kfa_display))
+
+    # Generate mock UUID and insert into satu_sehat_medication
+    med_uuid = f"med-uuid-{kode_brng}"
+    frappe.db.sql("""
+        INSERT INTO satu_sehat_medication (kode_brng, id_medication)
+        VALUES (%s, %s)
+        ON DUPLICATE KEY UPDATE id_medication = %s
+    """, (kode_brng, med_uuid, med_uuid))
+
+    frappe.db.commit()
+    return {"success": True, "message": f"Successfully mapped drug {kode_brng} to KFA code {kfa_code}"}
+
+
+
