@@ -178,3 +178,31 @@ def create_satusehat_views():
     frappe.db.commit()
 
     print("✓ Successfully created SatuSehat Database Views")
+
+
+@frappe.whitelist(allow_guest=True)
+def get_satusehat_config():
+    """
+    Returns the singleton SatuSehat Settings configurations for client consumption.
+    """
+    try:
+        doc = frappe.get_doc("SatuSehat Settings")
+        return {
+            "enabled": doc.enabled,
+            "auth_url": doc.auth_url,
+            "fhir_url": doc.fhir_url,
+            "client_id": doc.client_id,
+            "client_secret": doc.get_password("client_secret"),
+            "org_id": doc.org_id
+        }
+    except Exception:
+        # Fallback to sandbox mock if DocType settings record not populated yet
+        return {
+            "enabled": 1,
+            "auth_url": "https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1",
+            "fhir_url": "https://api-satusehat-stg.dto.kemkes.go.id/fhir-r4/v1",
+            "client_id": "nE9q36mwQeGapnlviMgIljH5tZXd8QdtXyWRZdYLdRdqLNZX",
+            "client_secret": "uYGNRDOBONmlfiMjjnUWzbwxRte1A6XaN9kkUgW9B4kYnEZ7tWcHDuAdM0fXEPi1",
+            "org_id": "3dc73178-c7d8-46e1-9148-1e5946f7a278"
+        }
+

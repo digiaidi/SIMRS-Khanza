@@ -155,6 +155,13 @@ class TestBridgingAPI(unittest.TestCase):
         create_satusehat_views()
         self.assertEqual(mock_f.db.sql.call_count, 13)
 
+    @patch('khanza_rs.bridging.api.frappe')
+    def test_get_satusehat_config(self, mock_f):
+        from khanza_rs.bridging.api import get_satusehat_config
+        mock_f.get_doc.side_effect = Exception("Not found")
+        config = get_satusehat_config()
+        self.assertEqual(config["client_id"], "nE9q36mwQeGapnlviMgIljH5tZXd8QdtXyWRZdYLdRdqLNZX")
+
 
 if __name__ == '__main__':
     unittest.main()
