@@ -16,6 +16,9 @@ sys.modules['frappe'] = mock_frappe
 mock_frappe._ = lambda x: x
 mock_frappe.whitelist = lambda *args, **kwargs: lambda fn: fn
 
+mock_redis = MagicMock()
+sys.modules['redis'] = mock_redis
+
 
 # Now import the APIs
 from khanza_rs.pasien_core.api import get_pasien_info, get_registrasi_aktif
@@ -153,7 +156,7 @@ class TestBridgingAPI(unittest.TestCase):
     def test_create_satusehat_views(self, mock_f):
         from khanza_rs.bridging.api import create_satusehat_views
         create_satusehat_views()
-        self.assertEqual(mock_f.db.sql.call_count, 13)
+        self.assertEqual(mock_f.db.sql.call_count, 40)
 
     @patch('khanza_rs.bridging.api.frappe')
     def test_get_satusehat_config(self, mock_f):
@@ -161,6 +164,17 @@ class TestBridgingAPI(unittest.TestCase):
         mock_f.get_doc.side_effect = Exception("Not found")
         config = get_satusehat_config()
         self.assertEqual(config["client_id"], "nE9q36mwQeGapnlviMgIljH5tZXd8QdtXyWRZdYLdRdqLNZX")
+
+    @patch('khanza_rs.bridging.api.frappe')
+    def test_publish_satusehat_event(self, mock_f):
+        from khanza_rs.bridging.api import publish_satusehat_event
+        import redis
+        mock_r = MagicMock()
+        redis.Redis.return_value = mock_r
+        mock_f.utils.now.return_value = '2026-07-09 11:00:00'
+        res = publish_satusehat_event("2026/07/08/000001", "Encounter")
+        self.assertTrue(res["success"])
+        mock_r.publish.assert_called_once()
 
 
 if __name__ == '__main__':

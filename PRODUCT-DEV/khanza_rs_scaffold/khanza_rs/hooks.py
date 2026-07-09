@@ -28,21 +28,30 @@ app_license = "GPL-3.0"
 
 doc_events = {
     # --- SatuSehat Chain Level 1: Encounter ---
-    # Saat registrasi pasien di-submit → buat billing awal
+    # Saat registrasi pasien di-submit → buat billing awal + trigger SatuSehat
     "Registrasi Pasien": {
-        "on_submit": "khanza_rs.keuangan.api.create_billing_rawat_jalan",
+        "on_submit": [
+            "khanza_rs.keuangan.api.create_billing_rawat_jalan",
+            "khanza_rs.bridging.api.publish_satusehat_event_encounter"
+        ]
     },
 
     # --- SatuSehat Chain Level 2: Condition + Procedure + Observation ---
-    # Saat pemeriksaan rawat jalan selesai → tambahkan biaya tindakan ke billing
+    # Saat pemeriksaan rawat jalan selesai → tambahkan biaya tindakan ke billing + trigger SatuSehat
     "Pemeriksaan Rawat Jalan": {
-        "on_submit": "khanza_rs.keuangan.api.add_tindakan_to_billing",
+        "on_submit": [
+            "khanza_rs.keuangan.api.add_tindakan_to_billing",
+            "khanza_rs.bridging.api.publish_satusehat_event_observation"
+        ]
     },
 
     # --- SatuSehat Chain Level 3: MedicationRequest + MedicationDispense ---
-    # Saat resep obat di-submit → tambahkan biaya obat ke billing
+    # Saat resep obat di-submit → tambahkan biaya obat ke billing + trigger SatuSehat
     "Resep Obat": {
-        "on_submit": "khanza_rs.keuangan.api.add_resep_to_billing",
+        "on_submit": [
+            "khanza_rs.keuangan.api.add_resep_to_billing",
+            "khanza_rs.bridging.api.publish_satusehat_event_medication"
+        ]
     },
 
     # --- Billing Completion ---

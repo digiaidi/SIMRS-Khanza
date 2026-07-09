@@ -177,6 +177,99 @@ def create_satusehat_views():
     """)
     frappe.db.commit()
 
+    # 14. Helper Radiologi Views & Tables
+    frappe.db.sql("""
+        CREATE OR REPLACE VIEW jns_perawatan_radiologi AS
+        SELECT 
+            'RAD001' AS kd_jenis_prw,
+            'Pemeriksaan Radiologi' AS nm_perawatan
+    """)
+    frappe.db.commit()
+
+    frappe.db.sql("""
+        CREATE OR REPLACE VIEW periksa_radiologi AS
+        SELECT 
+            pr.no_rawat AS no_rawat,
+            'RAD001' AS kd_jenis_prw,
+            hr.tgl_periksa AS tgl_periksa,
+            hr.jam_periksa AS jam,
+            hr.dokter_radiolog AS kd_dokter,
+            pr.dokter_pengirim AS dokter_perujuk
+        FROM `tabHasil Radiologi` hr
+        INNER JOIN `tabPermintaan Radiologi` pr ON hr.no_permintaan = pr.no_permintaan
+    """)
+    frappe.db.commit()
+
+    frappe.db.sql("""
+        CREATE OR REPLACE VIEW permintaan_pemeriksaan_radiologi AS
+        SELECT 
+            no_permintaan AS noorder,
+            'RAD001' AS kd_jenis_prw
+        FROM `tabPermintaan Radiologi`
+    """)
+    frappe.db.commit()
+
+    # 15. Create satusehat_review_queue table
+    frappe.db.sql("""
+        CREATE TABLE IF NOT EXISTS satusehat_review_queue (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            no_rawat VARCHAR(50) NOT NULL,
+            no_rkm_medis VARCHAR(50),
+            resource_type VARCHAR(50) NOT NULL,
+            risk_level VARCHAR(20) NOT NULL,
+            status VARCHAR(20) NOT NULL,
+            nm_pasien VARCHAR(100),
+            tgl_registrasi VARCHAR(50),
+            nm_dokter VARCHAR(100),
+            icd_code VARCHAR(50),
+            icd_display VARCHAR(200),
+            kfa_code VARCHAR(50),
+            drug_name VARCHAR(200),
+            quantity DECIMAL(10,2),
+            estimated_cost DECIMAL(15,2),
+            exam_type VARCHAR(100),
+            fhir_payload_json LONGTEXT NOT NULL,
+            fhir_endpoint VARCHAR(100) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            reviewed_at TIMESTAMP NULL,
+            reviewed_by VARCHAR(100),
+            review_note VARCHAR(255),
+            satusehat_id VARCHAR(100),
+            send_error TEXT
+        )
+    """)
+    frappe.db.commit()
+
+    # 16. Create all SatuSehat mapping/UUID lookup tables if not exists
+    mapping_tables = [
+        "CREATE TABLE IF NOT EXISTS satu_sehat_encounter (no_rawat VARCHAR(50) PRIMARY KEY, id_encounter VARCHAR(100) NOT NULL)",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_episodeofcare (no_rawat VARCHAR(50) PRIMARY KEY, id_encounter VARCHAR(100) NOT NULL)",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_servicerequest_radiologi (noorder VARCHAR(50), kd_jenis_prw VARCHAR(50), id_servicerequest VARCHAR(100), PRIMARY KEY(noorder, kd_jenis_prw))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_imagingstudy (no_rawat VARCHAR(50), kd_jenis_prw VARCHAR(50), tgl_periksa DATE, jam TIME, id_imagingstudy VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_medication (kode_brng VARCHAR(50) PRIMARY KEY, id_medication VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_mapping_obat (kode_brng VARCHAR(50) PRIMARY KEY, obat_code VARCHAR(50), obat_display VARCHAR(200))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_mapping_lokasi_ralan (kd_poli VARCHAR(50) PRIMARY KEY, id_lokasi_satusehat VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_condition (no_rawat VARCHAR(50), kd_penyakit VARCHAR(50), id_condition VARCHAR(100), PRIMARY KEY(no_rawat, kd_penyakit))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_procedure (no_rawat VARCHAR(50), kode VARCHAR(50), id_procedure VARCHAR(100), PRIMARY KEY(no_rawat, kode))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_clinicalimpression (no_rawat VARCHAR(50) PRIMARY KEY, id_clinicalimpression VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_observation (no_rawat VARCHAR(50) PRIMARY KEY, id_observation VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_medicationrequest (no_resep VARCHAR(50) PRIMARY KEY, id_medicationrequest VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_medicationdispense (no_resep VARCHAR(50) PRIMARY KEY, id_medicationdispense VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_allergyintolerance (no_rkm_medis VARCHAR(50) PRIMARY KEY, id_allergyintolerance VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_immunization (no_rawat VARCHAR(50) PRIMARY KEY, id_immunization VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_medicationstatement (no_rawat VARCHAR(50) PRIMARY KEY, id_medicationstatement VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_careplan (no_rawat VARCHAR(50) PRIMARY KEY, id_careplan VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_questionresponse_telaah_farmasi (no_resep VARCHAR(50) PRIMARY KEY, id_questionresponse VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_composition (no_rawat VARCHAR(50) PRIMARY KEY, id_composition VARCHAR(100))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_servicerequest_lab (noorder VARCHAR(50), kd_jenis_prw VARCHAR(50), id_servicerequest VARCHAR(100), PRIMARY KEY(noorder, kd_jenis_prw))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_specimen_lab (noorder VARCHAR(50), kd_jenis_prw VARCHAR(50), id_specimen VARCHAR(100), PRIMARY KEY(noorder, kd_jenis_prw))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_observation_lab (noorder VARCHAR(50), kd_jenis_prw VARCHAR(50), id_observation VARCHAR(100), PRIMARY KEY(noorder, kd_jenis_prw))",
+        "CREATE TABLE IF NOT EXISTS satu_sehat_diagnosticreport_lab (noorder VARCHAR(50), kd_jenis_prw VARCHAR(50), id_diagnosticreport VARCHAR(100), PRIMARY KEY(noorder, kd_jenis_prw))"
+    ]
+    for ddl in mapping_tables:
+        frappe.db.sql(ddl)
+        frappe.db.commit()
+
     print("✓ Successfully created SatuSehat Database Views")
 
 
@@ -205,4 +298,41 @@ def get_satusehat_config():
             "client_secret": "uYGNRDOBONmlfiMjjnUWzbwxRte1A6XaN9kkUgW9B4kYnEZ7tWcHDuAdM0fXEPi1",
             "org_id": "3dc73178-c7d8-46e1-9148-1e5946f7a278"
         }
+
+
+@frappe.whitelist(allow_guest=True)
+def publish_satusehat_event(no_rawat, resource_type):
+    """
+    Publish real-time sync signal to Redis queue.
+    """
+    try:
+        import redis
+        import json
+        r = redis.Redis(host='127.0.0.1', port=11000, decode_responses=True)
+        payload = {
+            "no_rawat": no_rawat,
+            "resource_type": resource_type,
+            "timestamp": frappe.utils.now()
+        }
+        r.publish('satusehat_sync_channel', json.dumps(payload))
+        return {"success": True, "message": "Event published successfully"}
+    except Exception as e:
+        frappe.log_error(f"SatuSehat Redis Publish Failed: {str(e)}", "SatuSehat Bridging")
+        return {"success": False, "error": str(e)}
+
+
+def publish_satusehat_event_encounter(doc, method=None):
+    if doc.get("no_rawat"):
+        publish_satusehat_event(doc.no_rawat, "Encounter")
+
+
+def publish_satusehat_event_observation(doc, method=None):
+    if doc.get("no_rawat"):
+        publish_satusehat_event(doc.no_rawat, "Observation")
+
+
+def publish_satusehat_event_medication(doc, method=None):
+    if doc.get("no_rawat"):
+        publish_satusehat_event(doc.no_rawat, "MedicationRequest")
+
 
